@@ -94,8 +94,8 @@ for (let i = 0; i < 16; i++) {
     }
   };
 }
-for (i = 0; i < 16; i++) {
-  document.getElementsById("reiniciar").onclick = function () {
+document.getElementsById("reiniciar").onclick = function () {
+  for (i = 0; i < 16; i++) {
     document.getElementsByTagName("img")[i].src = "img/logo.jpg";
   };
 }
