@@ -1,65 +1,31 @@
-var abiertos = 0;
-var per1, per2;
-var parejas = 0;
-var seleccionadas = [];
-var fallos = 0;
+import { reiniciarMemory, asignarClass } from "./functions.js";
 
-const NOMIMG = [
-  "mando1",
-  "mando2",
-  "mando3",
-  "mando4",
-  "mando5",
-  "mando6",
-  "mando7",
-  "mando8",
-];
-var aleatorio;
-var repetido = 0;
-
-function asignarClass() {
-  for (i = 0; i < 16; i++) {
-    do {
-      repetido = 0;
-      aleatorio = Math.floor(Math.random() * 8);
-      for (j = 0; j < i; j++) {
-        if (
-          NOMIMG[aleatorio] ==
-          document.getElementsByTagName("img")[j].classList[0]
-        ) {
-          repetido++;
-          if (repetido == 2) {
-            break;
-          }
-        }
-      }
-    } while (repetido >= 2);
-    document.getElementsByTagName("img")[i].classList.add(NOMIMG[aleatorio]);
-  }
-}
+export let abiertos = 0;
+export let per1, per2;
+export let parejas = 0;
+export let seleccionadas = [];
+export let fallos = 0;
 
 asignarClass();
 
+const imgs = document.getElementsByTagName("img");
 for (let i = 0; i < 16; i++) {
-  document.getElementsByTagName("img")[i].onclick = function () {
-    //solo se puede hacer click a la imagen si faltan parejas por encontrar
-    //y si la imagen clickada no tiene pareja (le falta la clase "emparejada")
-    if (parejas < 8) {
+  imgs[i].addEventListener("click", (event) => {
+    if (parejas < 8 && !event.target.classList.contains("emparejada")) {
       //guardo en un array las dos imágenes seleccionadas para que no se "pueda"
       //hacer click dos veces seguidas a la misma imagen
-      seleccionadas[abiertos] = document.getElementsByTagName("img")[i];
+      seleccionadas[abiertos] = event.target;
       if (seleccionadas[0] != seleccionadas[1]) {
         if (abiertos == 0) {
           //extraigo la primera clase, que es la que lleva el nombre del personaje
-          per1 = document.getElementsByTagName("img")[i].classList[0];
-          document.getElementsByTagName("img")[i].src = "img/" + per1 + ".jpg";
+          per1 = event.target.classList[0];
+          event.target.src = `img/${per1}.jpg`;
           abiertos++;
         } else if (abiertos == 1) {
           //extraigo la primera clase, que es la que lleva el nombre del personaje
-          per2 = document.getElementsByTagName("img")[i].classList[0];
-          document.getElementsByTagName("img")[i].src = "img/" + per2 + ".jpg";
+          per2 = event.target.classList[0];
+          event.target.src = `img/${per2}.jpg`;
           abiertos++;
-
           if (per1 == per2) {
             abiertos = 0;
             parejas++;
@@ -92,10 +58,8 @@ for (let i = 0; i < 16; i++) {
         }
       }
     }
-  };
+  });
 }
-document.getElementsById("reiniciar").onclick = function () {
-  for (i = 0; i < 16; i++) {
-    document.getElementsByTagName("img")[i].src = "img/logo.jpg";
-  };
-}
+
+reiniciar.addEventListener("click", reiniciarMemory);
+

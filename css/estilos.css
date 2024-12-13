@@ -1,21 +1,32 @@
 body {
+    margin: 0px auto;
+    color: white;
     background-color: black;
-}
-img {
-    width: 150px;
-    height: 150px;
-    margin-left: 30px;
-    margin-top: 10px;
-}
+    text-align: center;
 
-#memory {
-    position: absolute;
-    left: 25%;
-    right: 25%;
-    background-color: darkgoldenrod;
-   
 }
-button {
-    margin-left: 40%;
+div#memory img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: 10% auto;
+    padding: 0px;
+}
+div#memory {
+    position: absolute;
+    background-color: darkgoldenrod;
+    width: 680px;
+    /* min-width: 50%; */
+    max-height: 80%;
+    display: grid;
+    grid-template-columns: repeat(4, 20%);
+    grid-template-rows: repeat(4, 23%);
+    justify-content: space-around;
+    gap: 10px;
+    margin: 0px 30%;
+}
+input#reiniciar {
     width: 200px;
+}
+@media screen and (max-width: 460px){
+
 }
